@@ -10,9 +10,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.Response;
-import net.bytebuddy.asm.Advice.Return;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -151,21 +149,22 @@ public class ProductResource {
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
-    // // delete product
-    // @DELETE
-    // @Path("/{id}")
-    // @Produces("application/json")
-    // @Consumes("application/json")
-    // public Response deleteProduct(@PathParam("id") Long id){
-    // Optional<Product> productOptional = productRepository.findByIdOptional(id);
+    // delete product
+    @DELETE
+    @Path("/{id}")
+    @Produces("application/json")
+    @Consumes("application/json")
+    public Response deleteProduct(@PathParam("id") Long id){
+    Optional<Product> productOptional = productRepository.findByIdOptional(id);
 
-    // if (productOptional.isPresent()) {
-    //     productOptional.is
-    // }
+    if (productOptional.isPresent()) {
+        Product product =  productOptional.get();
+        product.setIsDeleted(true);
+    }
 
 
-    // return Response.ok().build();
-    // }
+    return Response.ok().build();
+    }
 
 
 }

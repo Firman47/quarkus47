@@ -1,6 +1,7 @@
 package org.acme.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
@@ -24,6 +25,16 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<Varian> varian = new ArrayList<>();
     
+    @Column(name = "is_delete")
+    private boolean isDeleted;
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
 
     public List<Varian> getVarian() {
         return varian;

@@ -1,5 +1,6 @@
 package org.acme.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +23,17 @@ public class Warna {
     @JoinColumn(name = "varian_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_varian_varian_d"))
     private Varian varian;
 
+    @Column(name = "is_delted")
+    private boolean isDeleted;
+    
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
     public Long getId() {
         return id;
     }
@@ -35,7 +47,7 @@ public class Warna {
     }
 
     public void setWarna(String warna) {
-        warna = warna;
+       this.warna = warna;
     }
 
     public Varian getVarian() {

@@ -5,7 +5,7 @@ public record VarianWithDto(
     Long id,
     Long product_id,
     String tipe,
-    List<WarnaDto> warna
+    List<WarnaWithDto> warna
 ) {
 
 }

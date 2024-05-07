@@ -1,8 +1,18 @@
 package org.acme.resource;
 
+import java.util.List;
+
+import org.acme.cmd.WarnaCmd;
 import org.acme.dto.WarnaDto;
+import org.acme.dto.WarnaWithDto;
+import org.acme.entity.Varian;
+import org.acme.entity.Warna;
 import org.acme.repository.WarnaRepository;
 import org.acme.response.ApiResponse;
+
+
+import java.util.Map;
+
 import jakarta.ws.rs.Produces;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -24,30 +34,65 @@ public class WarnaResource {
   @Inject
     WarnaRepository warnaRepository;
 
+     // GET WARNA
+     @GET
+     public ApiResponse<WarnaDto> getVarian(){
+          return warnaRepository.getWarnaImpl();
+     }
+
+    // GET ALL WARNA VARIAN
     @GET
-    public ApiResponse<WarnaDto> getVarian(){
-         return warnaRepository.getWarnaImpl();
+    @Path("/warnas")
+    public ApiResponse<WarnaCmd> getAllWarn(){
+       return warnaRepository.getAllWarnaVarianImpl();
     }
 
+    // GET WARNA BY VARIAN
+    @GET 
+    @Path("/varian/{idVarian}")
+    public ApiResponse<WarnaCmd> getWarnaByVarian(Long idVarian) {
+       return warnaRepository.getWarnaByVarianImpl(idVarian);
+    }
+   
+    // CREATE WARNA
     @POST
     @Transactional
-    public Response storeVarian(WarnaDto req){
+    public Response soreWarna(WarnaDto req){
         return warnaRepository.createWarnaImpl(req);
     }
 
+    // CREATE WARNA VARIAN
+    @POST
+    @Path("/varian")
+    @Transactional
+    public Response createWarnaVarian(WarnaWithDto req){
+        Map<String, Object> data = warnaRepository.createWarnaVarianImpl( req);
+        return  Response.ok(data).build();
+    }
 
     @PUT
     @Transactional
     @Path("{id}")
-    public Response updateVarian(@PathParam("id") Long id, WarnaDto req){
+    public Response updateWarna(@PathParam("id") Long id, WarnaDto req){
         return warnaRepository.editWarnaImpl(id, req);
+    }
+
+    // edit warna varian
+    @PUT 
+    @Path("/varian/{id}")
+    @Transactional
+    public Response updateWarna(@PathParam("id") Long id, WarnaWithDto req){
+        Map<String, Object> data = warnaRepository.editWarnaVarianImpl(id, req);
+    return Response.ok(data).build();
     }
 
     @DELETE
     @Transactional
     @Path("{id}")
-    public Response deleteVarian(@PathParam("id") Long id){
+    public Response deleteWarna(@PathParam("id") Long id){
         return  warnaRepository.deleteWarnaImpl(id);
     }
+
+
 
 }

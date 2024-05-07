@@ -3,9 +3,13 @@ package org.acme.repository.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.acme.cmd.ProductCmd;
 import org.acme.dto.ProductDto;
 import org.acme.entity.Product;
+import org.acme.entity.Varian;
+import org.acme.entity.Warna;
 import org.acme.repository.ProductRepository;
+import org.acme.repository.WarnaRepository;
 import org.acme.response.ApiResponse;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -25,7 +29,8 @@ public class ProductImpl implements ProductRepository{
     
     @Inject
     ProductRepository productRepository;
-
+    @Inject
+    WarnaRepository warnaRepository;
     // get Product
     @Override
     public ApiResponse<ProductDto> getProductImpl(@QueryParam("page") int page, @QueryParam("size") int size){
@@ -83,5 +88,17 @@ public class ProductImpl implements ProductRepository{
 
     }
 
+    public Response createProductsImpl(ProductCmd req){
+        Product product = new Product();
+        Varian varian = Varian.findById(req.idVarian());
+        Warna warna = warnaRepository.findById(req.idWarna());
+
+        product.setProductName(req.productname());
+        product.setVarian(varian);
+        product.setWarna(warna);
+
+        Product.persist(product);
+        return Response.ok().build();
+    }
 
 }

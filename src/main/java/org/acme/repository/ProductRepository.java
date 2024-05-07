@@ -1,5 +1,6 @@
 package org.acme.repository;
 
+import org.acme.cmd.ProductCmd;
 import org.acme.dto.ProductDto;
 import org.acme.entity.Product;
 import org.acme.response.ApiResponse;
@@ -15,6 +16,8 @@ ApiResponse<ProductDto> getProductImpl(@QueryParam("page") int page, @QueryParam
   Response createProductImpl(ProductDto req);
   Response editProductImpl(@PathParam("id") Long id, ProductDto req);
   Response deleteProdductImpl(Long id);
+
+  Response createProductsImpl(ProductCmd req);
 
 
 }

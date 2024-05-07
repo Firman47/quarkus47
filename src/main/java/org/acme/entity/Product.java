@@ -3,24 +3,58 @@ package org.acme.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
 import java.util.List;
-@Entity
-public class Product {
 
-    @Id
-    @GeneratedValue
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+@Entity
+public class Product extends PanacheEntity{
+
     public Long id;
     public String productname;
     public String harga;
     public String stok;
 
-    @OneToMany(mappedBy = "product")
-    private List<Varian> varian = new ArrayList<>();
+    @JoinColumn(name = "idVarian")
+    @ManyToOne()
+    private Varian varian ;
     
+    @JoinColumn(name = "idWarna")
+    @ManyToOne()
+    private Warna warna ;
+    public Warna getWarna() {
+        return warna;
+    }
+
+    
+    @OneToMany(mappedBy = "product")
+    private List<Varian> varians = new ArrayList<>();
+
+    public List<Varian> getVarians() {
+        return varians;
+    }
+
+    public void setVarians(List<Varian> varians) {
+        this.varians = varians;
+    }
+
+    public void setWarna(Warna warna) {
+        this.warna = warna;
+    }
+
+    public Varian getVarian() {
+        return varian;
+    }
+
+    public void setVarian(Varian varian) {
+        this.varian = varian;
+    }
+
     @Column(name = "is_delete")
     private boolean isDeleted;
 
@@ -32,13 +66,6 @@ public class Product {
         this.isDeleted = isDeleted;
     }
 
-    public List<Varian> getVarian() {
-        return varian;
-    }
-
-    public void setVarian(List<Varian> varian) {
-        this.varian = varian;
-    }
 
 
     public Long getId() {

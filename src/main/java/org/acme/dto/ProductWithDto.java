@@ -7,6 +7,10 @@ public record ProductWithDto(
     String harga,
     String stok,
     List<VarianWithDto> varian
+    // Long idvarian,
+    // Long idWarna,
+    // String tipe,
+    // String warna
  ) {
 
 }

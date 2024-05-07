@@ -6,6 +6,8 @@ public record ProductDto(
     String productname,
     String harga,
     String stok
+   
+    
     // List<VarianDto> varian
  ) {
 

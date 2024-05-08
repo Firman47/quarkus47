@@ -1,6 +1,5 @@
 package org.acme.dto;
 
-import java.util.List;
 
 public record ProductWitVarianDto(
      Long id,

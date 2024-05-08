@@ -10,11 +10,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 // import jakarta.persistence.JoinColumn;
 // import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.ForeignKey;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
@@ -74,5 +76,6 @@ public class Varian extends PanacheEntityBase{
     public void setDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
+
 
 }

@@ -75,7 +75,7 @@ public class ProductResource {
     // get edit product by id
     @GET
     @Path("/{id}")
-    public Response getStudent(@PathParam("id") Long id) {
+    public Response getProduct(@PathParam("id") Long id) {
         Map<String, Object> map = new HashMap<>();
         Optional<Product> productOptional = productRepository.findByIdOptional(id);
 

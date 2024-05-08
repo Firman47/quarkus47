@@ -21,7 +21,6 @@ import jakarta.ws.rs.core.Response;
 
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.panache.common.Page;
-import io.quarkus.panache.common.Sort;
 
 
 @ApplicationScoped
@@ -92,8 +91,12 @@ public class ProductImpl implements ProductRepository{
         Product product = new Product();
         Varian varian = Varian.findById(req.idVarian());
         Warna warna = warnaRepository.findById(req.idWarna());
-
+        
         product.setProductName(req.productname());
+        product.setHarga(req.harga());
+        product.setStok(req.stok());
+
+        
         product.setVarian(varian);
         product.setWarna(warna);
 
